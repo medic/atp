@@ -13,7 +13,7 @@
     <div class="container">
       <h1><code>medicmobile_android.getLocation()</code></h1>
 
-      <button class="btn btn-primary" click="requestLocation">Trigger location request</button>
+      <button class="btn btn-primary" id="request-location">Trigger location request</button>
 
       <h2>Location request results</h2>
       <ol id="log">
@@ -26,7 +26,7 @@
 
     <script>
       $(function() {
-        // TODO your code here
+        $('#request-location').on('click', requestLocation);
       });
 
       function log() {
