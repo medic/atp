@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/atp/res/bootstrap-4.0.0-beta.min.css">
+    <title>Medic Android Wrapper Test Pages</title>
+
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><code>medicmobile_android.getLocation()</code></h1>
+
+      <button class="btn btn-primary" click="requestLocation">Trigger location request</button>
+
+      <h2>Location request results</h2>
+      <ol id="log">
+      </ol>
+    </div>
+
+    <script src="/atp/res/jquery-3.2.1.slim.min.js"></script>
+    <script src="/atp/res/popper-1.11.0.min.js"></script>
+    <script src="/atp/res/bootstrap-4.0.0-beta.min.js"></script>
+
+    <script>
+      $(function() {
+        // TODO your code here
+      });
+
+      function log() {
+        var args = Array.prototype.slice.call(arguments, 0);
+        $('#log').prepend($('<li>', { text: args.join(' ') }));
+      }
+
+      function requestLocation() {
+        console.log('requestLocation() :: ENTRY');
+        if(!medicmobile_android) return log('requestLocation()', 'medicmobile_android', 'not available');
+        if(!medicmobile_android.getLocation) return log('requestLocation()', 'medicmobile_android.getLocation()', 'not available');
+        log('requestLocation()', medicmobile_android.getLocation());
+      }
+    </script>
+  </body>
+</html>
+
