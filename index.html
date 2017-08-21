@@ -33,14 +33,7 @@
 
       function addInfo(key, value) {
         var $info = $('#device-info tbody');
-        var $row = $('<tr><td>' + key + '</td><td><code>' + value + '</code></td></tr>');
-        $info.append($row);
-        $row.find('td').on('click', copyToClipboard);
-      }
-
-      function copyToClipboard() {
-        $($(this).closest('tr').find('td').get(1)).select();
-        document.execCommand('Copy');
+        $info.append('<tr><td>' + key + '</td><td><code>' + value + '</code></td></tr>');
       }
     </script>
   </body>
