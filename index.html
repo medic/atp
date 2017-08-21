@@ -17,7 +17,7 @@
 
       <div>
         <h1>Device Info</h1>
-        <table class="table table-striped" id="device-info"></table>
+        <table class="table table-striped" id="device-info"><tbody/></table>
       </div>
     </div>
 
@@ -32,8 +32,8 @@
       });
 
       function addInfo(key, value) {
-        var $info = $('#device-info');
-        $info.append('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
+        var $info = $('#device-info tbody');
+        $info.append('<tr><td>' + key + '</td><td><code>' + value + '</code></td></tr>');
       }
     </script>
   </body>
