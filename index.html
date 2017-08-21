@@ -14,10 +14,27 @@
         <li><a href="/atp/location"><code>medicmobile_android.getLocation()</code></a></li>
         <li><a href="/atp/form-inputs">Standard form inputs</a></li>
       </ul>
+
+      <div>
+        <h1>Device Info</h1>
+        <table class="table table-striped" id="device-info"></table>
+      </div>
     </div>
 
     <script src="/atp/res/jquery-3.2.1.slim.min.js"></script>
     <script src="/atp/res/popper-1.11.0.min.js"></script>
     <script src="/atp/res/bootstrap-4.0.0-beta.min.js"></script>
+
+    <script>
+      $(function() {
+        addInfo('User Agent', navigator.userAgent);
+        addInfo('medicmobile_android', !!medicmobile_android);
+      });
+
+      function addInfo(key, value) {
+        var $info = $('#device-info');
+        $info.append('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
+      }
+    </script>
   </body>
 </html>
