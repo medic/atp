@@ -30,6 +30,7 @@
       $(function() {
         addInfo('User Agent', navigator.userAgent);
         addInfo('<code>medicmobile_android</code>', !!window.medicmobile_android);
+        addInfo('<code>navigator.geolocation</code>', !!navigator.geolocation);
       });
 
       function addInfo(key, value) {

@@ -18,11 +18,25 @@
     </nav>
 
     <div class="container">
-      <h1><code>medicmobile_android.getLocation()</code></h1>
 
-      <button class="btn btn-primary" id="request-location">Trigger location request</button>
+      <div id="android-api">
+        <h1><code>medicmobile_android.getLocation()</code></h1>
 
-      <h2>Location request results</h2>
+        <button class="btn btn-primary request-location">Trigger location request</button>
+
+        <h2>Location request results</h2>
+      </div>
+
+      <div id="html-api">
+        <h1><code>navigator.geolocation</code></h1>
+
+        <button class="btn btn-primary request-location">Trigger location request</button>
+        <button class="btn btn-primary watch-location">Start location watcher</button>
+        <button class="btn btn-primary stop-watching">Stop location watcher</button>
+
+        <h2>Location request results</h2>
+      </div>
+
       <ol id="log">
       </ol>
     </div>
@@ -32,20 +46,80 @@
     <script src="/atp/res/bootstrap-4.0.0-beta.min.js"></script>
 
     <script>
+      // android-api
       $(function() {
-        $('#request-location').on('click', requestLocation);
+        $('#android-api .request-location').on('click', requestLocation);
+
+        function requestLocation() {
+          if(!medicmobile_android) return log('android-api.requestLocation()', 'medicmobile_android', 'not available');
+          if(!medicmobile_android.getLocation) return log('android-api.requestLocation()', 'medicmobile_android.getLocation()', 'not available');
+          log('requestLocation()', medicmobile_android.getLocation());
+        }
       });
+
+      // html-api
+      $(function() {
+        var $watchLocation = $('#html-api .watch-location');
+        var $stopWatching = $('#html-api .stop-watching');
+
+        $('#html-api .request-location').on('click', requestLocation);
+        $watchLocation.on('click', watchLocation);
+        $stopWatching.on('click', stopWatching);
+
+        var watcher;
+
+        function requestLocation() {
+          console.log('html.requestLocation() :: ENTRY');
+
+          navigator.geolocation.getCurrentPosition(function(position) {
+            log('html.requestLocation()', position);
+          });
+
+          console.log('html.requestLocation() :: EXIT');
+        }
+
+        function watchLocation() {
+          console.log('html.watchLocation() :: ENTRY');
+
+          if(watcher) {
+            console.log('html.watchLocation() :: watcher already set.  Will not clear.');
+          } else {
+            watcher = navigator.geolocation.watchPosition(function(position) {
+              log('html.watchPosition()', position);
+            });
+
+            $watchLocation.attr('disabled', true);
+            $stopWatching.attr('disabled', false);
+
+            console.log('html.watchLocation() :: watcher started.');
+          }
+
+          console.log('html.watchLocation() :: EXIT');
+        }
+
+        function stopWatching() {
+          console.log('html.stopWatching() :: ENTRY');
+
+          if(!watcher) {
+            console.log('html.stopWatching() :: no watcher set.');
+          } else {
+            navigator.geolocation.clearWatch(watcher);
+
+            $watchLocation.attr('disabled', false);
+            $stopWatching.attr('disabled', true);
+
+            console.log('html.stopWatching() :: watcher cleared.');
+          }
+
+          console.log('html.stopWatching() :: EXIT');
+        }
+      });
+
 
       function log() {
         var args = Array.prototype.slice.call(arguments, 0);
         $('#log').prepend($('<li>', { text: args.join(' ') }));
-      }
-
-      function requestLocation() {
-        console.log('requestLocation() :: ENTRY');
-        if(!medicmobile_android) return log('requestLocation()', 'medicmobile_android', 'not available');
-        if(!medicmobile_android.getLocation) return log('requestLocation()', 'medicmobile_android.getLocation()', 'not available');
-        log('requestLocation()', medicmobile_android.getLocation());
+        console.log(args.join(' '));
       }
     </script>
   </body>
