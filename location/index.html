@@ -7,6 +7,9 @@
     <title>Medic Android Wrapper Test Pages</title>
 
     <style>
+      #logs {
+        font-family: monospace;
+      }
     </style>
   </head>
   <body>
@@ -73,7 +76,7 @@
 
           navigator.geolocation.getCurrentPosition(
             function(position) {
-              log('html.requestLocation()', position);
+              log('html.requestLocation()', posToString(position));
             },
             function(err) {
               log('html.requestLocation()', 'error', posErrorToString(err));
@@ -90,7 +93,7 @@
           } else {
             watcher = navigator.geolocation.watchPosition(
               function(position) {
-                log('html.watchPosition()', position);
+                log('html.watchPosition()', posToString(position));
               },
               function(err) {
                 log('html.watchPosition()', 'error', posErrorToString(err));
@@ -120,6 +123,19 @@
           }
 
           console.log('html.stopWatching() :: EXIT');
+        }
+
+
+        function posToString(position) {
+          return '[ ' +
+              'timestamp=' + new Date(position.timestamp) +
+              'accuracy=' + position.coords.accuracy + ', '
+              'altitude=' + position.coords.altitude + ', '
+              'altitudeAccuracy=' + position.coords.altitudeAccuracy + ', '
+              'heading=' + position.coords.heading + ', '
+              'latitude=' + position.coords.latitude + ', '
+              'longitude=' + position.coords.longitude + ', '
+              'speed=' + position.coords.speed + ' ]';
         }
 
         function posErrorToString(err) {
