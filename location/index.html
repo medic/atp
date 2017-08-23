@@ -71,9 +71,13 @@
         function requestLocation() {
           console.log('html.requestLocation() :: ENTRY');
 
-          navigator.geolocation.getCurrentPosition(function(position) {
-            log('html.requestLocation()', position);
-          });
+          navigator.geolocation.getCurrentPosition(
+            function(position) {
+              log('html.requestLocation()', position);
+            },
+            function(err) {
+              log('html.requestLocation()', 'error', err);
+            });
 
           console.log('html.requestLocation() :: EXIT');
         }
@@ -84,9 +88,13 @@
           if(watcher) {
             console.log('html.watchLocation() :: watcher already set.  Will not clear.');
           } else {
-            watcher = navigator.geolocation.watchPosition(function(position) {
-              log('html.watchPosition()', position);
-            });
+            watcher = navigator.geolocation.watchPosition(
+              function(position) {
+                log('html.watchPosition()', position);
+              },
+              function(err) {
+                log('html.watchPosition()', 'error', err);
+              });
 
             $watchLocation.attr('disabled', true);
             $stopWatching.attr('disabled', false);
