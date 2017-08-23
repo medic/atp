@@ -76,7 +76,7 @@
               log('html.requestLocation()', position);
             },
             function(err) {
-              log('html.requestLocation()', 'error', err);
+              log('html.requestLocation()', 'error', posErrorToString(err));
             });
 
           console.log('html.requestLocation() :: EXIT');
@@ -93,7 +93,7 @@
                 log('html.watchPosition()', position);
               },
               function(err) {
-                log('html.watchPosition()', 'error', err);
+                log('html.watchPosition()', 'error', posErrorToString(err));
               });
 
             $watchLocation.attr('disabled', true);
@@ -120,6 +120,17 @@
           }
 
           console.log('html.stopWatching() :: EXIT');
+        }
+
+        function posErrorToString(err) {
+          var type;
+          switch(err.code) {
+            case 1:  type = 'PERMISSION_DENIED';    break;
+            case 2:  type = 'POSITION_UNAVAILABLE'; break;
+            case 3:  type = 'TIMEOUT';              break;
+            default: type = 'UNKNOWN';              break;
+          }
+          return type + ' ' + err.message;
         }
       });
 
