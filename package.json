@@ -1,0 +1,20 @@
+{
+  "name": "medic-android-test-pages",
+  "version": "1.0.0",
+  "description": "Test pages for medic-android wrapper.",
+  "main": "index.html",
+  "scripts": {
+    "start": "(sleep 1 && echo 'Open folder /atp') & http-server .. -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/medic/atp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/medic/atp/issues"
+  },
+  "homepage": "https://github.com/medic/atp#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
