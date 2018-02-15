@@ -1,4 +1,4 @@
-// PouchDB 6.4.2
+// PouchDB 6.4.3
 // 
 // (c) 2012-2018 Dale Harvey and the PouchDB team
 // PouchDB may be freely distributed under the Apache license, version 2.0.
@@ -5418,7 +5418,7 @@ PouchDB.defaults = function (defaultOpts) {
 };
 
 // managed automatically by set-version.js
-var version = "6.4.2";
+var version = "6.4.3";
 
 function debugPouch(PouchDB) {
   PouchDB.debug = debug;
